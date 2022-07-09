@@ -1,5 +1,5 @@
 {
-  "name": "typewriter",
+  "name": "ts-typewriter",
   "version": "1.0.0",
   "description": "A Typewriter effect class",
   "main": "lib/index.js",
@@ -10,7 +10,6 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
     "preversion" : "npm run lint",
     "version" : "npm run format && git add -A src",
     "postversion" : "git push && git push --tags"
@@ -21,7 +20,7 @@
     "url": "git+https://github.com/gadc1996/typewriter.git"
   },
   "keywords": ["Typewritter", "Animation"],
-  "author": "Alex Delgado",
+  "author": "alexdelgado",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gadc1996/typewriter/issues"
