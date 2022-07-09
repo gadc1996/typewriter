@@ -1,0 +1,42 @@
+{
+  "name": "typewriter",
+  "version": "1.0.0",
+  "description": "A Typewriter effect class",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gadc1996/typewriter.git"
+  },
+  "keywords": ["Typewritter", "Animation"],
+  "author": "Alex Delgado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gadc1996/typewriter/issues"
+  },
+  "homepage": "https://github.com/gadc1996/typewriter#readme",
+  "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "jest": "^28.1.2",
+    "prettier": "^2.7.1",
+    "ts-jest": "^28.0.5",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.7.4"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}
