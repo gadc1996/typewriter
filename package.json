@@ -1,12 +1,12 @@
 {
   "name": "@alexdelgado/typewriter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Typewriter effect class",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "tsc",
+    "build": "tsc && sass src/style.scss src/style.css && minify src/style.css > lib/style.min.css",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
