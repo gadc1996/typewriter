@@ -1,56 +1,70 @@
+interface Options {
+  forwardSpeed: number;
+  backwardSpeed: number;
+  sleep: number;
+}
+
+const Defaults: Options = {
+  forwardSpeed: 30,
+  backwardSpeed: 30,
+  sleep: 30
+};
+
 export default class Typewriter {
-  paragraphs: Array<string>
-  typedText: string
-  currentIndex: number = 0;
+  private options: Options;
+  private paragraphs: Array<string>;
+  private currentIndex: number = 0;
 
-  constructor(paragraphs: Array<string>) {
-    this.paragraphs = paragraphs
-    this.typedText = ''
+  typedText: string = '';
+
+  constructor(paragraphs: Array<string>, options: Options) {
+    this.paragraphs = paragraphs;
+    this.options = { ...Defaults, ...options };
   }
 
-  addCharacter(character: string): void {
-    this.typedText += character
+  private addCharacter(character: string): void {
+    this.typedText += character;
   }
 
-  removeCharacter(): void {
-    this.typedText = this.typedText.substring(0, this.currentIndex--)
+  private removeCharacter(): void {
+    this.typedText = this.typedText.substring(0, this.currentIndex--);
   }
 
-  async typeFordward(paragraph: string): Promise<void> {
-    this.addCharacter(paragraph[this.currentIndex++])
-    await new Promise(resolve => {
+  private async typeFordward(paragraph: string): Promise<void> {
+    this.addCharacter(paragraph[this.currentIndex++]);
+    await new Promise((resolve) => {
       setTimeout(async () => {
-        this.currentIndex < paragraph.length && await this.typeFordward(paragraph)
-        resolve(null)
-      }, 80)
-    })
+        this.currentIndex < paragraph.length && (await this.typeFordward(paragraph));
+        resolve(null);
+      }, this.options.forwardSpeed);
+    });
   }
 
-  async typeBackwards(): Promise<void> {
-    this.removeCharacter()
-    await new Promise(resolve => {
+  private async typeBackwards(): Promise<void> {
+    this.removeCharacter();
+    await new Promise((resolve) => {
       setTimeout(async () => {
-        this.currentIndex >= 0 && await this.typeBackwards()
-        resolve(null)
-      }, 50)
-    })
-  }
-  
-  resetIndex() {
-    this.currentIndex = 0
+        this.currentIndex >= 0 && (await this.typeBackwards());
+        resolve(null);
+      }, this.options.backwardSpeed);
+    });
   }
 
-  async sleep(): Promise<void> {
-    await new Promise(resolve => setTimeout(() => resolve(null), 2000))
+  private resetIndex() {
+    this.currentIndex = 0;
+  }
+
+  private async sleep(): Promise<void> {
+    await new Promise((resolve) => setTimeout(() => resolve(null), this.options.sleep));
   }
 
   async start(): Promise<void> {
-    while(true) {
+    while (true) {
       for (let paragraph of this.paragraphs) {
         await this.typeFordward(paragraph)
-        .then(async() => await this.sleep())
-        .then(async() => await this.typeBackwards())
-        .then(async() => await this.resetIndex())
+          .then(async () => await this.sleep())
+          .then(async () => await this.typeBackwards())
+          .then(async () => await this.resetIndex());
       }
     }
   }
