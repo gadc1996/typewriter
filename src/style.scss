@@ -10,10 +10,11 @@
   &__text {
     font-size: 3rem;
     text-align: center;
+    color: white;
   }
   &__text::after {
     content: '';
-    color: white !important;
+    color: white;
     position: absolute;
     background: white;
     width: 0.15em;
