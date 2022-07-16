@@ -3,18 +3,17 @@
 
   position: absolute;
   width: 90%;
+  height: 100vh;
   z-index: 100;
-  top: 50%;
-  margin-top: -50px;
+  top: 20rem;
   margin-left: 5%;
   &__text {
-    color: white;
     font-size: 3rem;
     text-align: center;
   }
   &__text::after {
     content: '';
-    color: white;
+    color: white !important;
     position: absolute;
     background: white;
     width: 0.15em;
